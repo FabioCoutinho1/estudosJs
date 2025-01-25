@@ -2,46 +2,56 @@ const prompt = require("prompt-sync")();
 const arrDeContatos = [];
 
 const criarContatos = (nome, numero, dd) => {
-  const contato = { nome, numero, dd};
+  const contato = { nome, numero, dd };
   arrDeContatos.push(contato);
 };
 
-const mostrarListaDeContatos = (arr) => {
-  arr.forEach((i, j) =>
-    console.log(`${j + 1} Nome: ${i.nome}, Numero: ${i.numero}, DD: ${i.dd}`)
-  );
+const mostrarListaDeContatos = (mensagem, arr) => {
+  console.log(mensagem);
+  arr.forEach((i, j) => {
+    const { nome, numero, dd } = i;
+    console.log(`${j + 1} Nome: ${nome}, Numero: ${numero}, DD: ${dd}`);
+  });
 };
 
 while (true) {
-  console.log("vamos começar\n");
   console.log("(1) adicionar contato \n");
   console.log("(2) mostrar contatos salvos\n");
   console.log("(3) apagar contato \n");
   console.log("(4) sair");
 
-  const opcao = prompt();
+  const key = prompt();
 
-  if (opcao === "1") {
-    const nome = prompt(console.log("Nome:"));
-    const numero = prompt(console.log("Numero:"));
-    const dd = prompt(console.log("DD:"));
+  switch (key) {
+    case "1":
+      const nome = prompt(console.log("Nome:"));
+      const numero = prompt(console.log("Numero:"));
+      const dd = prompt(console.log("DD:"));
 
-    criarContatos(nome, numero, dd);
-  }
+      criarContatos(nome, numero, dd);
+      break;
 
-  if (opcao === "2") {
-    mostrarListaDeContatos(arrDeContatos);
-  }
+    case "2":
+      mostrarListaDeContatos("Aqui esta sua lista", arrDeContatos);
+      break;
 
-  if (opcao === "3") {
-    mostrarListaDeContatos(arrDeContatos);
-    const numeroDaLista = parseInt(
-      prompt(console.log("Selecione o numero do contato que dejesa apagar:"))
-    );
-    arrDeContatos.splice(numeroDaLista - 1, 1);
-    mostrarListaDeContatos(arrDeContatos);
-  }
-  if (opcao === "4") {
-    break;
+    case "3":
+      mostrarListaDeContatos("", arrDeContatos);
+      const numeroDaLista = parseInt(
+        prompt(console.log("Selecione o numero do contato que dejesa apagar:"))
+      );
+      arrDeContatos.splice(numeroDaLista - 1, 1);
+
+      break;
+
+    case "4":
+      const desejaSair = prompt("Deseja realmente sair (s/n)");
+      if (desejaSair.toLowerCase() === "s") {
+        console.log("Saindo...");
+        return;
+      }
+      break;
+    default:
+      console.log("Opção invalida, tente novamente");
   }
 }
