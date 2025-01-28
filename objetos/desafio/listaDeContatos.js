@@ -14,6 +14,22 @@ const mostrarListaDeContatos = (mensagem, arr) => {
   });
 };
 
+const validarEntradas = (numList, mensagem) => {
+  if (numList > 0 && numList <= arrDeContatos.length) {
+    arrDeContatos.splice(numList - 1, 1);
+  } else {
+    console.log(mensagem);
+  }
+};
+
+const validarEntradaContatos = (nome, numero, dd) => {
+  if (nome === "" || numero === "" || dd === "") {
+    console.log("O campo nao pode estar vazio");
+  } else {
+    criarContatos(nome, numero, dd);
+  }
+};
+
 while (true) {
   console.log("(1) adicionar contato \n");
   console.log("(2) mostrar contatos salvos\n");
@@ -24,15 +40,23 @@ while (true) {
 
   switch (key) {
     case "1":
-      const nome = prompt(console.log("Nome:"));
-      const numero = prompt(console.log("Numero:"));
-      const dd = prompt(console.log("DD:"));
+      const nome = prompt("Nome:");
+      const numero = prompt("Numero:");
+      const dd = prompt("DD:");
 
-      criarContatos(nome, numero, dd);
+      validarEntradaContatos(nome, numero, dd);
+
       break;
 
     case "2":
-      mostrarListaDeContatos("Aqui esta sua lista", arrDeContatos);
+      if (arrDeContatos.length === 0) {
+        mostrarListaDeContatos(
+          "Não a nenhum contado adicionadao",
+          arrDeContatos
+        );
+      } else {
+        mostrarListaDeContatos("Aqui esta sua lista", arrDeContatos);
+      }
       break;
 
     case "3":
@@ -40,7 +64,7 @@ while (true) {
       const numeroDaLista = parseInt(
         prompt(console.log("Selecione o numero do contato que dejesa apagar:"))
       );
-      arrDeContatos.splice(numeroDaLista - 1, 1);
+      validarEntradas(numeroDaLista, "Opção Invalida, tente novamente");
 
       break;
 
