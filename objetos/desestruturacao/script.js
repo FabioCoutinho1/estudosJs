@@ -1,54 +1,56 @@
-// const pessoa = {
-//   nome: "Fabio",
-//   idade: 21,
-// };
-
-// const { nome, idade } = pessoa;
-
-// console.log(nome, idade);
-
-const frutas = ["uva", "banana", "pera"];
-
-const [a, ...b] = frutas;
-console.log(a, ...b);
-
-const funcionario = [
-  { nome: "fabio", idade: 21, salario: 1700 },
-  { nome: "pedro", idade: 21, salario: 1700 },
-  { nome: "julio", idade: 21, salario: 1700 },
-  { nome: "amanda", idade: 21, salario: 1700 },
+const fruits = ["uva", "banada", "pera"];
+const pessoa = {nome: "fabio", idade: 20}
+const pessoas = [
+  { nome: "João", idade: 28, salario: 2500.0 },
+  { nome: "Maria", idade: 34, salario: 3200.5 },
+  { nome: "Pedro", idade: 40, salario: 4100.75 },
+  { nome: "Ana", idade: 25, salario: 2800.0 },
+  { nome: "Lucas", idade: 30, salario: 3500.0 },
+];
+const fruitsMais = [
+  "Maçã",
+  "Banana",
+  "Laranja",
+  "Manga",
+  "Uva",
+  "Abacaxi",
+  "Morango",
+  "Melancia",
+  "Pera",
+  "Kiwi",
+  "Acerola",
+  "Cereja",
+  "Amora",
+  "Pêssego",
+  "Maracujá",
+  "Abacate",
+  "Goiaba",
+  "Tangerina",
+  "Figo",
+  "Caju",
 ];
 
-// funcionario.forEach((i) => {
-//   const { nome, idade, salario } = i;
-//   console.log(nome, idade, salario);
-// });
+const [, u, b] = fruits;
+const { nome, idade } = pessoa;
 
-// testando em função
-function frutasDes([a, b]) {
-  console.log(a, b);
+console.log(u, b);
+
+function mostrarFrutas([a, ...rest]) {
+  console.log(a, ...rest);
 }
 
-// aqui ja estamos recebendo os dados desestruturados nos paramentros
-// ao passar o array ao chamar a função os paramentrosja iram pegar os dados desestruturados
+mostrarFrutas(fruitsMais);
 
-function objsDes() {
-  funcionario.forEach((i) => {
-    const { nome, idade, salario } = i;
+function mostrarPessoas({ person, idade }) {
+  console.log(person, idade);
+}
+
+mostrarPessoas(pessoa);
+
+function mostrarPessoas() {
+  pessoas.forEach((idex) => {
+    const { nome, idade, salario } = idex;
     console.log(nome, idade, salario);
   });
 }
-
-objsDes()
-
-const pessoa = { nome: "Fabio", idade: 21 };
-
-function pessoaDes({ nome, idade }) {
-  console.log(nome, idade);
-}
-
-pessoaDes(pessoa);
-
-function funcionarioTeste([a, ...b]) {}
-
-funcionarioTeste(funcionario);
+mostrarPessoas();

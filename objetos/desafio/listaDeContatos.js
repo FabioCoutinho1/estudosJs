@@ -1,5 +1,5 @@
 const prompt = require("prompt-sync")();
-const arrDeContatos = [];
+let arrDeContatos = [];
 
 const criarContatos = (nome, numero, dd) => {
   const contato = { nome, numero, dd };
@@ -16,18 +16,30 @@ const mostrarListaDeContatos = (mensagem, arr) => {
 
 const validarEntradas = (numList, mensagem) => {
   if (numList > 0 && numList <= arrDeContatos.length) {
-    arrDeContatos.splice(numList - 1, 1);
+    arrDeContatos = arrDeContatos.filter((_, index) => index !== numList - 1);
   } else {
     console.log(mensagem);
   }
 };
 
 const validarEntradaContatos = (nome, numero, dd) => {
-  if (nome === "" || numero === "" || dd === "") {
+  if (!nome.trim() || !numero.trim() || !dd.trim()) {
     console.log("O campo nao pode estar vazio");
-  } else {
-    criarContatos(nome, numero, dd);
+    return false;
   }
+  if (!/^\d+$/.test(numero) || numero.length < 8) {
+    console.log(
+      "Número inválido. Deve conter apenas dígitos e no mínimo 8 caracteres."
+    );
+    return false;
+  }
+  if (!/^\d{2}$/.test(dd)) {
+    console.log("O DD deve conter apenas dois numero");
+    return false;
+  }
+
+  criarContatos(nome, numero, dd);
+  return true;
 };
 
 while (true) {
