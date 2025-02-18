@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <input
+        type="number"
+        placeholder="cep"
+        maxlength="8"
+        minlength="8"
+        required
+      />
+      <button type="submit">enviar</button>
+    </form>
+
+    <p id="cep">Cep:</p>
+    <p id="endereco">Enderço:</p>
+    <p id="bairro">Bairro:</p>
+    <p id="cidade">Cidade:</p>
+  </body>
+  <script>
+    const cep = document.querySelector("#cep");
+    const endereco = document.querySelector("#endereco");
+    const barirro = document.querySelector("#bairro");
+    const cidade = document.querySelector("#cidade");
+    const form = document.querySelector("form");
+    const input = document.querySelector("form input");
+    const url = "https://viacep.com.br/ws/72831610/json/";
+
+    const consutarCep = (cepResponse) => {
+      fetch(`https://viacep.com.br/ws/${cepResponse}/json/`)
+        .then((resposta) => resposta.json())
+        .then((data) => {
+          console.log(data);
+          cep.innerHTML += data.cep;
+          endereco.innerHTML += data.logradouro;
+          barirro.innerHTML += data.bairro;
+          cidade.innerHTML += data.localidade;
+        });
+    };
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let inputValue = input.value;
+
+      consutarCep(inputValue);
+
+      input.value = "";
+    });
+  </script>
+</html>
