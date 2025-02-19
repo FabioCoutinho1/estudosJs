@@ -31,6 +31,13 @@
     const input = document.querySelector("form input");
     const url = "https://viacep.com.br/ws/72831610/json/";
 
+    const liparText = () => {
+      cep.innerHTML = "";
+      endereco.innerHTML = "";
+      barirro.innerHTML = "";
+      cidade.innerHTML = "";
+    };
+
     const consutarCep = (cepResponse) => {
       fetch(`https://viacep.com.br/ws/${cepResponse}/json/`)
         .then((resposta) => resposta.json())
@@ -47,9 +54,10 @@
       e.preventDefault();
       let inputValue = input.value;
 
-      consutarCep(inputValue);
-
+      liparText();
+      
       input.value = "";
+      consutarCep(inputValue);
     });
   </script>
 </html>

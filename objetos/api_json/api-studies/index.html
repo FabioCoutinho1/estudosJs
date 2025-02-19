@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Ola Mundo!</h1>
+    <div class="box"></div>
+  </body>
+  <script>
+    const box = document.querySelector(".box")
+    
+    fetch("https://rickandmortyapi.com/api/character")
+      .then((res) => res.json())
+      .then((data) => {
+        const persons = data.results;
+        console.log(persons);
+
+        persons.forEach((element) => {
+          const elementP = document.createElement("p");
+          box.appendChild(elementP)
+          elementP.innerHTML = element.name;
+          console.log(element.name);
+        });
+      });
+  </script>
+</html>
