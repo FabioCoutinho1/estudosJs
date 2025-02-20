@@ -3,10 +3,162 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+
     <title>Document</title>
   </head>
   <body>
-    <a href="objetos/api_json/api-studies/index.html">estudo de api</a>
-    <a href="objetos/api_json/buscador_de_cep/index.html">estudo de api</a>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .box {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+
+        padding: 10px;
+      }
+      button {
+        background-color: rgb(21, 95, 255);
+        border: none;
+        width: 250px;
+        height: 75px;
+        border-radius: 16px;
+        cursor: pointer;
+
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+
+        transform: scale(0.9);
+        transition: all 0.2s ease-in-out;
+      }
+
+      button:hover {
+        transform: scale(1);
+      }
+
+      .box-code {
+        display: flex;
+        gap: 50px;
+      }
+
+      .code {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      code{
+        height: 600px;
+      }
+    </style>
+    <div class="box">
+      <a href="objetos/api_json/api-studies/index.html">
+        <button>estudo de api</button>
+      </a>
+      <a href="objetos/api_json/buscador_de_cep/index.html">
+        <button>CEP</button>
+      </a>
+    </div>
+    <div class="box-code">
+      <div class="code">
+        <h1>Codigo Estudo de api</h1>
+        <pre><code id="codigo">
+          const box = document.querySelector(".box");
+      const buttonNetx = document.querySelector("#button-netx");
+      let newUrl;
+      let url = "https://rickandmortyapi.com/api/character/";
+      
+      const fetchApi = async (url) => {
+        fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        const { info, results } = data;
+        newUrl = info.next;
+        results.forEach((element) => {
+          const personElement = document.createElement("div")
+          personElement.classList.add("person")
+      
+          const elementP = document.createElement("p");
+          const elementImg = document.createElement("img");
+          elementImg.setAttribute("src", element.image);
+          personElement.appendChild(elementP)
+          personElement.appendChild(elementImg)
+          box.appendChild(personElement);
+          elementP.innerHTML = element.name;
+        });
+      });
+      };
+      
+      const netxPage = () => {
+        fetchApi(newUrl);
+      };
+      
+      buttonNetx.addEventListener("click", () => {
+        netxPage();
+      });
+      
+      fetchApi(url);
+        </code></pre>
+      </div>
+      <div class="code">
+        <h1>Codigo CEP</h1>
+        <pre><code id="codigo">
+          const cep = document.querySelector("#cep");
+          const endereco = document.querySelector("#endereco");
+          const barirro = document.querySelector("#bairro");
+          const cidade = document.querySelector("#cidade");
+          const form = document.querySelector("form");
+          const input = document.querySelector("form input");
+          const url = "https://viacep.com.br/ws/72831610/json/";
+      
+          const liparText = () => {
+            cep.innerHTML = "";
+            endereco.innerHTML = "";
+            barirro.innerHTML = "";
+            cidade.innerHTML = "";
+          };
+      
+          const consutarCep = (cepResponse) => {
+            fetch(`https://viacep.com.br/ws/${cepResponse}/json/`)
+              .then((resposta) => resposta.json())
+              .then((data) => {
+                console.log(data);
+                cep.innerHTML += data.cep;
+                endereco.innerHTML += data.logradouro;
+                barirro.innerHTML += data.bairro;
+                cidade.innerHTML += data.localidade;
+              });
+          };
+      
+          form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            let inputValue = input.value;
+      
+            liparText();
+      
+            input.value = "";
+            consutarCep(inputValue);
+          });
+        </code></pre>
+      </div>
+    </div>
   </body>
 </html>
