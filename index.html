@@ -22,7 +22,7 @@
         box-sizing: border-box;
       }
 
-      body {
+      body{
         height: 100dvh;
       }
 
@@ -47,9 +47,6 @@
       }
 
       .box-code {
-        height: 100dvh;
-        width: 100dvw;
-
         display: flex;
         justify-content: center;
         align-items: center;
@@ -68,12 +65,11 @@
 
       code {
         height: 600px;
-        width: 500px;
-        max-width: 480px;
+        min-width: 500px;
       }
 
       @media screen and (max-width: 762px) {
-        .box-code {
+        .box-code{
           flex-direction: column;
           justify-content: start;
         }
