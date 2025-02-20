@@ -3,47 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
   <body>
     <h1>Ola Mundo!</h1>
     <div class="box"></div>
-    <button id="button-netx">next page</button>
+    <button id="button-netx">Mostrar mais</button>
   </body>
-  <script>
-    const box = document.querySelector(".box");
-    const buttonNetx = document.querySelector("#button-netx");
-    let url = "https://rickandmortyapi.com/api/character/";
-
-    const netxPage = () => {
-      url = `"https://rickandmortyapi.com/api/character/?page=${2}"`;
-      console.log(url);
-      return url;
-    };
-
-    buttonNetx.addEventListener("click", () => {
-      let newUrl = netxPage();
-      console.log(newUrl);
-    });
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(url)
-        const persons = data.results;
-        console.log(data);
-        console.log(persons);
-
-        persons.forEach((element) => {
-          const elementP = document.createElement("p");
-          box.appendChild(elementP);
-          const elementImg = document.createElement("img");
-          elementImg.setAttribute("src", element.image);
-          box.appendChild(elementImg);
-          elementP.innerHTML = element.name;
-          console.log(element.name);
-        });
-      });
-   
-  </script>
+  <script></script>
 </html>
