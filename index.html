@@ -21,18 +21,11 @@
         padding: 0;
         box-sizing: border-box;
       }
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .box {
-        display: flex;
-        justify-content: center;
-        gap: 50px;
 
-        padding: 10px;
+      body {
+        height: 100dvh;
       }
+
       button {
         background-color: rgb(21, 95, 255);
         border: none;
@@ -54,31 +47,43 @@
       }
 
       .box-code {
+        height: 100dvh;
+        width: 100dvw;
+
         display: flex;
+        justify-content: center;
+        align-items: center;
         gap: 50px;
       }
 
       .code {
+        height: 100dvh;
+
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 30px;
       }
 
-      code{
+      code {
         height: 600px;
+        width: 500px;
+        max-width: 480px;
+      }
+
+      @media screen and (max-width: 762px) {
+        .box-code {
+          flex-direction: column;
+          justify-content: start;
+        }
       }
     </style>
-    <div class="box">
-      <a href="objetos/api_json/api-studies/index.html">
-        <button>estudo de api</button>
-      </a>
-      <a href="objetos/api_json/buscador_de_cep/index.html">
-        <button>CEP</button>
-      </a>
-    </div>
     <div class="box-code">
       <div class="code">
+        <a href="objetos/api_json/api-studies/index.html">
+          <button>estudo de api</button>
+        </a>
         <h1>Codigo Estudo de api</h1>
         <pre><code id="codigo">
           const box = document.querySelector(".box");
@@ -119,6 +124,9 @@
         </code></pre>
       </div>
       <div class="code">
+        <a href="objetos/api_json/buscador_de_cep/index.html">
+          <button>CEP</button>
+        </a>
         <h1>Codigo CEP</h1>
         <pre><code id="codigo">
           const cep = document.querySelector("#cep");
