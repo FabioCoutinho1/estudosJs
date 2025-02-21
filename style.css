@@ -24,8 +24,13 @@ body {
 
 }
 
+pre{
+  display: flex;
+  justify-content: center;
+}
+
 code{
-    max-width: 300px;
+    max-width: 400px;
 }
 
 h1{
