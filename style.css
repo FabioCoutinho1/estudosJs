@@ -21,7 +21,11 @@ body {
   align-items: center;
 
   height: 100dvh;
-  width: 480px;
+
+}
+
+code{
+    max-width: 300px;
 }
 
 h1{
