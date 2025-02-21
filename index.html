@@ -15,97 +15,89 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="code">
-      <a href="objetos/api_json/api-studies/index.html">
-        <button>estudo de api</button>
-      </a>
-      <h1>Codigo Estudo de api</h1>
-      <pre><code id="codigo">
- const box = document.querySelector(".box");
- const buttonNetx = document.querySelector("#button-netx");
- let newUrl;
- let url = "https://rickandmortyapi.com/api/character/";
- 
- const fetchApi = async (url) => {
-   fetch(url)
-     .then((res) => res.json())
-     .then((data) => {
-       const { info, results } = data;
- 
-       newUrl = info.next;
-       results.forEach((element) => {
- 
-         const personElement = document.createElement("div")
-         personElement.classList.add("person")
-         
-         const elementP = document.createElement("p");
- 
-         const elementImg = document.createElement("img");
-         elementImg.setAttribute("src", element.image);
- 
-         personElement.appendChild(elementP)
-         personElement.appendChild(elementImg)
-         box.appendChild(personElement);
- 
-         elementP.innerHTML = element.name;
+    <div class="box">
+      <div class="code">
+        <a href="objetos/api_json/api-studies/index.html">
+          <button>estudo de api</button>
+        </a>
+        <h1>Codigo Estudo de api</h1>
+        <pre><code id="codigo">
+       const box = document.querySelector(".box");
+       const buttonNetx = document.querySelector("#button-netx");
+       let newUrl;
+       let url = "https://rickandmortyapi.com/api/character/";
+       
+       const fetchApi = async (url) => {
+         fetch(url)
+       .then((res) => res.json())
+       .then((data) => {
+         const { info, results } = data;
+         newUrl = info.next;
+         results.forEach((element) => {
+           const personElement = document.createElement("div")
+           personElement.classList.add("person")
+      
+           const elementP = document.createElement("p");
+           const elementImg = document.createElement("img");
+           elementImg.setAttribute("src", element.image);
+           personElement.appendChild(elementP)
+           personElement.appendChild(elementImg)
+           box.appendChild(personElement);
+           elementP.innerHTML = element.name;
+         });
        });
-     });
- };
- 
- const netxPage = () => {
-   fetchApi(newUrl);
- };
- 
- buttonNetx.addEventListener("click", () => {
-   netxPage();
- });
- 
- fetchApi(url);
-</code></pre>
-    </div>
-    <div class="code">
-      <a href="objetos/api_json/buscador_de_cep/index.html">
-        <button>CEP</button>
-      </a>
-      <h1>Codigo CEP</h1>
-      <pre><code id="codigo">
-    const cep = document.querySelector("#cep");
-    const endereco = document.querySelector("#endereco");
-    const barirro = document.querySelector("#bairro");
-    const cidade = document.querySelector("#cidade");
-    const form = document.querySelector("form");
-    const input = document.querySelector("form input");
-    const url = "https://viacep.com.br/ws/72831610/json/";
-
-    const liparText = () => {
-      cep.innerHTML = "";
-      endereco.innerHTML = "";
-      barirro.innerHTML = "";
-      cidade.innerHTML = "";
-    };
-
-    const consutarCep = (cepResponse) => {
-      fetch(`https://viacep.com.br/ws/${cepResponse}/json/`)
-        .then((resposta) => resposta.json())
-        .then((data) => {
-          console.log(data);
-          cep.innerHTML += data.cep;
-          endereco.innerHTML += data.logradouro;
-          barirro.innerHTML += data.bairro;
-          cidade.innerHTML += data.localidade;
-        });
-    };
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      let inputValue = input.value;
-
-      liparText();
-
-      input.value = "";
-      consutarCep(inputValue);
-    });
+       };
+       
+       const netxPage = () => {
+         fetchApi(newUrl);
+       };
+       
+       buttonNetx.addEventListener("click", () => {
+         netxPage();
+       });
+       
+       fetchApi(url);
         </code></pre>
+      </div>
+      <div class="code">
+        <a href="objetos/api_json/buscador_de_cep/index.html">
+          <button>CEP</button>
+        </a>
+        <h1>Codigo CEP</h1>
+        <pre><code id="codigo">
+      const cep = document.querySelector("#cep");
+      const endereco = document.querySelector("#endereco");
+      const barirro = document.querySelector("#bairro");
+      const cidade = document.querySelector("#cidade");
+      const form = document.querySelector("form");
+      const input = document.querySelector("form input");
+      const url = "https://viacep.com.br/ws/72831610/json/";
+      const liparText = () => {
+        cep.innerHTML = "";
+        endereco.innerHTML = "";
+        barirro.innerHTML = "";
+        cidade.innerHTML = "";
+      };
+      const consutarCep = (cepResponse) => {
+        fetch(`https://viacep.com.br/ws/${cepResponse}/json/`)
+          .then((resposta) => resposta.json())
+          .then((data) => {
+            console.log(data);
+            cep.innerHTML += data.cep;
+            endereco.innerHTML += data.logradouro;
+            barirro.innerHTML += data.bairro;
+            cidade.innerHTML += data.localidade;
+          });
+      };
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let inputValue = input.value;
+        liparText();
+        input.value = "";
+        consutarCep(inputValue);
+      });
+        </code></pre>
+      </div>
     </div>
   </body>
 </html>
